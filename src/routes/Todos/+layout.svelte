@@ -9,3 +9,5 @@
 </svelte:head>
 
 {@render children()}
+
+<a href="/">Home</a>
