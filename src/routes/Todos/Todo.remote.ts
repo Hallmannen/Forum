@@ -1,27 +1,55 @@
+import { form, query } from "$app/server";
+import * as v from "valibot";
 
+let current_id = 0;
 
-import {form, query} from "$app/server"
-import * as v from "valibot"
+let todos: {
+    id: number;
+    text: string;
+    completed: boolean;
+}[] = [];
 
-let todos: string[] = [];
+todos.push({
+    id: current_id++,
+    text: "super banana",
+    completed: false
+});
 
-export const getTodos = query(async () => todos);
+export const getTodos = query(async() => {
+    return todos;
+});
 
-export const addTodo = form(
-v.object({
-    text: v.pipe(v.string(), v.nonEmpty()),
-}),
-    async ({text}) => {
-        todos.push(text);
-    },
+export const createTodo = form(
+    v.object({
+        text: v.string()
+    }),
+    ({ text }) => {
+        todos.push({
+            id: current_id++,
+            text: text,
+            completed: false
+        });
+    }
 );
-export const deleteTodo = form(
-v.object({
-    text: v.pipe(v.string(), v.nonEmpty()),
-}),
-    async ({text}) => {
-        todos.splice(todos.indexOf(text), 1);
 
-    },
+export const removeTodo = form(
+    v.object({
+        id: v.number()
+    }),
+    ({ id }) => {
+        todos = todos.filter((todo) => todo.id != id);
+    }
 );
 
+export const completeTodo = form(
+    v.object({
+        id: v.number()
+    }),
+    ({ id }) => {
+        let todo = todos.find((todo) => todo.id == id);
+
+        if (todo) {
+            todo.completed = !todo.completed;
+        }
+    }
+);

@@ -1,26 +1,28 @@
 <script lang="ts">
-    import{addTodo, deleteTodo, getTodos} from "./Todo.remote";
+    import{createTodo, completeTodo, removeTodo, getTodos} from "./Todo.remote";
 
     let todos = getTodos();
 </script>
-
+    <form {...createTodo}>
+        <input {...createTodo.fields.text.as("text")}/>
+        <button>lägg till</button>
+    </form>
 <ul>
     {#each await getTodos() as todo}
-        <li>{todo}</li>
-        
+        {@const remove = removeTodo.for(todo.id)}
+        {@const complete = completeTodo.for(todo.id)}
+
+    <li>
+        <form {...complete}>
+            <button>
+                {todo.completed ? "[X]" : "[ ]"}
+            </button>
+        </form>
+        {todo.text}
+        <form {...remove}>
+            <button>x</button>
+        </form>
+    </li>
+
     {/each}
 </ul>
-
-<form {...addTodo}>
-    <input {...addTodo.fields.text.as ("text")} />
-    <button>add</button>
-</form>
-<form {...deleteTodo}>
-  <input {...deleteTodo.fields.text.as ("text")} />
-  
-  <button>delete</button>
-</form>
-
-
-
-
