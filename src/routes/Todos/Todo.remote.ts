@@ -1,3 +1,4 @@
+import { db } from "#lib";
 import { form, query } from "$app/server";
 import * as v from "valibot";
 
@@ -16,7 +17,7 @@ todos.push({
 });
 
 export const getTodos = query(async() => {
-    return todos;
+    await db.orm.public.Todo.all();
 });
 
 export const createTodo = form(
@@ -24,10 +25,7 @@ export const createTodo = form(
         text: v.string()
     }),
     ({ text }) => {
-        todos.push({
-            id: current_id++,
-            text: text,
-            completed: false
+        await db.orm.public.Todo.create({ text, completed: false });
         });
     }
 );
@@ -36,11 +34,11 @@ export const removeTodo = form(
     v.object({
         id: v.number()
     }),
-    ({ id }) => {
-        todos = todos.filter((todo) => todo.id != id);
+    async ({ id }) => {
+        await db.orm.public.Todo.where({id}).delete
     }
 );
-
+    
 export const completeTodo = form(
     v.object({
         id: v.number()
@@ -53,3 +51,4 @@ export const completeTodo = form(
         }
     }
 );
+

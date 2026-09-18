@@ -7,6 +7,7 @@
         <input {...createTodo.fields.text.as("text")}/>
         <button>lägg till</button>
     </form>
+    
 <ul>
     {#each await getTodos() as todo}
         {@const remove = removeTodo.for(todo.id)}
