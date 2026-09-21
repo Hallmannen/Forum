@@ -1,7 +1,6 @@
 <script lang="ts">
     import{createTodo, completeTodo, removeTodo, getTodos} from "./Todo.remote";
 
-    let todos = getTodos();
 </script>
     <form {...createTodo}>
         <input {...createTodo.fields.text.as("text")}/>

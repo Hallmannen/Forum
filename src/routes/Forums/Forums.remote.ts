@@ -2,20 +2,20 @@
 
 import {form, query} from "$app/server"
 import * as v from "valibot"
+import { db } from "../../prisma/db";
 
-let Forums: {
-    id: number;  
-    name: string;  
-}[] = [];
-export const getForums = query(async () => Forums);
 
 export const addForum = form(
 v.object({
     name: v.pipe(v.string(), v.nonEmpty()),
-    id: v.pipe(v.number()),
+    
 
 }),
-    async ({id, name}) => {
-        Forums.push({id, name});
+    async ({name}) => {
+        await db.orm.public.Forum.create({ name });
     },
+);
+export const getForums = query(async() => 
+    await db.orm.public.Forum.all()
+        
 );

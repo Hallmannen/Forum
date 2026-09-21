@@ -2,6 +2,7 @@
 
 import {form, query} from "$app/server"
 import * as v from "valibot"
+import { db } from "../../../prisma/db";
 
 
 let messages: Record<string, string[]> = {};
@@ -16,11 +17,11 @@ export const createMessage = form(
         message: v.string(),
         id: v.string(),
     }),
-    ({ id, message }) => {
+    async ({ id, message }) => {
         if (!messages[id]){
             messages[id] = [];
         }
-        messages[id].push(message)
+        await db.orm.public.Message.create({ text: message, forumid: id });
 
     },
 );

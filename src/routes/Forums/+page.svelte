@@ -1,11 +1,7 @@
 <script lang="ts">
     import{addForum, getForums} from "./Forums.remote";
 
-    let Forum = getForums();
-    let forums: {
-    id: number;
-    name: string;
-    }[] = [];
+
     
 </script>
 
@@ -19,7 +15,6 @@
 
 <form {...addForum}>
     <input {...addForum.fields.name.as ("text")} />
-    <input {...addForum.fields.id.as ("number")} />
     <button type="submit">add</button>
 </form>
 
