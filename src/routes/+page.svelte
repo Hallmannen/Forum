@@ -2,3 +2,4 @@
 <a href="/Inloggning">Inloggning</a>
 <a href="/Todos">Todos</a>
 <a href="/Forums">Forums</a>
+<a href="/Registrering">Registrering</a>

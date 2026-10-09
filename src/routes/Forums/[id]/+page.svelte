@@ -10,7 +10,7 @@ import { getMessages, createMessage } from "./Forums.remote";
 </ul>
 
 <form {...createMessage}>
-    <input {...createMessage.fields.message.as ("text")} />
+    <input {...createMessage.fields.message.as ("text")}placeholder="Type " />
     <input {...createMessage.fields.id.as("hidden", params.id)}/>
     <button>add</button>
 </form>

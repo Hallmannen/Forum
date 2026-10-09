@@ -5,7 +5,7 @@ import { getRequestEvent } from '$app/server';
 import { redirect } from "@sveltejs/kit";
 
 
-export const loggin = form(
+export const login = form(
 v.object({
     name: v.pipe(v.string(), v.nonEmpty()),
     password: v.pipe(v.string(), v.nonEmpty()),
