@@ -19,7 +19,7 @@
             </button>
         </form>
         {todo.text}
-        <form {...remove}>
+        <form {...removeTodo}>
             <button>x</button>
         </form>
     </li>
