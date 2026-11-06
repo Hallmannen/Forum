@@ -3,3 +3,4 @@
 <a href="/Todos">Todos</a>
 <a href="/Forums">Forums</a>
 <a href="/Registrering">Registrering</a>
+<a href="/Auktion">Auktion</a>

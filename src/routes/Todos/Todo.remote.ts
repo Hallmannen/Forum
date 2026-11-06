@@ -33,4 +33,3 @@ export const completeTodo = form(
       await db.orm.public.Todo.where({id}).update({completed: true})
     }
 );
-
