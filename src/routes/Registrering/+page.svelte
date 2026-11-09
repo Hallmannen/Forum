@@ -6,7 +6,9 @@
     <input {...createAccount.fields.username.as ("text")}placeholder="Type Username" />
     <input {...createAccount.fields._password.as ("password")}placeholder="Type Password" />
     <button type="submit">create an account</button>
-    
+    {#each createAccount.fields.username.issues() ?? [] as issue}
+     <p>{issue.message}</p>
+{/each}
 </form>
 
 <a href="/">Home</a>
